@@ -1,11 +1,16 @@
 import cv2
 import numpy as np
+import os
 
-list_of_files = ['1.png','2.png','3.png']
+images_directory = r'images/'
+list_of_files = []
+
+for filename in os.listdir(images_directory):
+    list_of_files.append(filename)
 
 image_number = 0
 for file in list_of_files:
-    image = cv2.imread(file)
+    image = cv2.imread(images_directory + file)
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blur = cv2.medianBlur(gray, 5)
@@ -78,7 +83,7 @@ for file in list_of_files:
             result = cv2.warpPerspective(ROI, matrix, (128, 128))
             cv2.imshow('Corrected', result)
             
-            cv2.imwrite('corrected_{}.png'.format(image_number), result)
+            cv2.imwrite('processed-images/corrected_{}.png'.format(image_number), result)
             cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), 2)
             image_number += 1
 
