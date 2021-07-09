@@ -25,8 +25,8 @@ for file in list_of_files:
     cnts = cv2.findContours(close, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
 
-    min_area = 5000
-    max_area = 15000
+    min_area = 6000
+    max_area = 60000
     
     for c in cnts:
         area = cv2.contourArea(c)
