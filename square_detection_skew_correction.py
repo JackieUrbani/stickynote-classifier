@@ -81,14 +81,14 @@ for file in list_of_files:
             # Apply Perspective Transform Algorithm
             matrix = cv2.getPerspectiveTransform(pts1, pts2)
             result = cv2.warpPerspective(ROI, matrix, (128, 128))
-            cv2.imshow('Corrected', result)
+            #cv2.imshow('Corrected', result)
             
             cv2.imwrite('processed-images/corrected_{}.png'.format(image_number), result)
             cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), 2)
             image_number += 1
 
-    cv2.imshow('sharpen', sharpen)
-    cv2.imshow('close', close)
-    cv2.imshow('thresh', thresh)
-    cv2.imshow('image', image)
-    cv2.waitKey()
+    #cv2.imshow('sharpen', sharpen)
+    #cv2.imshow('close', close)
+    #cv2.imshow('thresh', thresh)
+    #cv2.imshow('image', image)
+    #cv2.waitKey()
