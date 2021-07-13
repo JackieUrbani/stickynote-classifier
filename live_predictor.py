@@ -13,7 +13,7 @@ model = model_from_json(loaded_model_json)
 model.load_weights("model.h5")
 print("Loaded model from disk")
 # Define labels
-labels = ['throwaway','arrow','M','S','F']
+labels = ['throwaway','M','S','F','O']
 
 def predict(image):
     #testing_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
