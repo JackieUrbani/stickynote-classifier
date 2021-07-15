@@ -35,6 +35,9 @@ cap = cv2.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
+    cv2.imshow('Camera', frame)
+    if cv2.waitKey(1) == 27:
+        break  # esc to quit
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blur = cv2.medianBlur(gray, 5)
@@ -52,6 +55,7 @@ while True:
     min_area = 6000
     max_area = 60000
     
+    count = 0
     for c in cnts:
         area = cv2.contourArea(c)
         if area > min_area and area < max_area:
@@ -105,8 +109,14 @@ while True:
             # Apply Perspective Transform Algorithm
             matrix = cv2.getPerspectiveTransform(pts1, pts2)
             result = cv2.warpPerspective(ROI, matrix, (128, 128))
-            #cv2.imshow('Corrected', result)
+            if (predict(result) != "throwaway"):
+                cv2.imshow('Corrected #' + str(count), result)
             
             # Write out prediction for square found
-            print(predict(result))
-    time.sleep(0.5)
+            if (predict(result) != "throwaway"):
+                print(str(count) + ": " + predict(result))
+                
+            count = count + 1
+    #time.sleep(0.5)
+    
+cv2.destroyAllWindows()
